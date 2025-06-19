@@ -44,11 +44,8 @@ export default function Home() {
                     </NavLink>
                 ))}
             </div>
-
-            <Cart/>
-
+            <Cart />
         </div>
-</>
-        
+        </>
     )
 }

@@ -2,8 +2,8 @@ import { useParams, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { ajouter } from "../home/homeSlice"
 import "./details.css"
+import { useState } from "react"
 import Cart from "../../components/cart/cart"
-import Navbar from "../../components/nav/Nav"
 
 export default function Details() {
     const { name } = useParams()
@@ -13,59 +13,99 @@ export default function Details() {
     const pizza = useSelector(state => 
         state.pizza.allPizzas.find(pizza => pizza.name === name)
     )
+    
+    const [selectedIngredients, setSelectedIngredients] = useState(
+        pizza?.ingredients.map(ing => ({ ...ing, selected: true })) || []
+    )
+
+    const toggleIngredient = (index) => {
+        setSelectedIngredients(selectedIngredients.map((ing, i) => 
+            i === index ? { ...ing, selected: !ing.selected } : ing
+        ))
+    }
 
     if (!pizza) {
         return <div>Pizza not found</div>
     }
 
     return (
-        <>
-        <Navbar/>
-            <div className="all-details">
+        <div className="all-details">
             <div className="main-details">
-            <button className="back-button" onClick={() => navigate(-1)}>
-                ← Back
-            </button>
-            
-            <div className="details-container">
-                <div className="image-details">
-                    <img src={pizza.image} alt={pizza.name} />
+                <div className="details-header">
+                    <button className="back-button" onClick={() => navigate(-1)}>
+                        ← Retour
+                    </button>
                 </div>
-
-                <div className="info-details">
-                    <h1>{pizza.name}</h1>
-                    <p className="description">{pizza.description}</p>
-                    <div className="price-section">
-                        <span className="price">€{pizza.price.toFixed(2)}</span>
+                
+                <div className="details-container">
+                    <div className="details-image-container">
+                        <img src={pizza.image} alt={pizza.name} className="details-image"/>
+                    </div>
+                    
+                    <div className="details-info">
+                        <div className="details-title-section">
+                            <h1 className="details-title">{pizza.name}</h1>
+                            <span className="details-price">€{pizza.price.toFixed(2)}</span>
+                        </div>
+                        
+                        <p className="details-description">{pizza.description}</p>
+                        
+                        <div className="details-section">
+                            <h2 className="section-title">Pâte à pizza</h2>
+                            <div className="section-option">
+                                <div className="option-indicator">
+                                    <span className="indicator-circle"></span>
+                                </div>
+                                <span className="option-name">Classic</span>
+                                <span className="option-action">Modifier</span>
+                            </div>
+                        </div>
+                        
+                        <div className="details-section">
+                            <div className="section-header">
+                                <h2 className="section-title">Ingrédients</h2>
+                                <button className="section-toggle">
+                                    <i className="arrow-up"></i>
+                                </button>
+                            </div>
+                            
+                            <div className="ingredients-list">
+                                {selectedIngredients.map((ingredient, index) => (
+                                    <div key={index} className="ingredient-item">
+                                        <div className="ingredient-icon">
+                                            <img src={ingredient.icon || "/ingredients/default.png"} alt={ingredient.name} />
+                                        </div>
+                                        <span className="ingredient-name">{ingredient.name}</span>
+                                        <div className="ingredient-controls">
+                                            <button 
+                                                className={`control-button ${!ingredient.selected ? 'active' : ''}`}
+                                                onClick={() => toggleIngredient(index)}
+                                            >
+                                                {ingredient.selected ? '−' : '+'}
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
                         <button 
-                            className="add-to-cart"
+                            className="add-to-cart-button"
                             onClick={() => {
-                                dispatch(ajouter(pizza))
+                                const customizedPizza = {
+                                    ...pizza,
+                                    ingredients: selectedIngredients.filter(ing => ing.selected)
+                                }
+                                dispatch(ajouter(customizedPizza))
                                 navigate('/')
                             }}
                         >
-                            Add to Cart
+                            Ajouter au panier €{pizza.price.toFixed(2)}
                         </button>
-                    </div>
-
-                    <div className="ingredients-section">
-                        <h2>Ingredients</h2>
-                        <div className="ingredients-list">
-                            {pizza.ingredients.map(ingredient => (
-                                <div key={ingredient.name} className="ingredient-item">
-                                    <span>{ingredient.name}</span>
-                                </div>
-                            ))}
-                        </div>
                     </div>
                 </div>
             </div>
+            <Cart />
         </div>
-
-        <Cart/>
-        </div>
-        </>
-        
-        
     )
 }

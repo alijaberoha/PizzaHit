@@ -6,40 +6,45 @@ import { supprimer } from "../../features/home/homeSlice"
 export default function Cart() {
     const cart = useSelector(state => state.pizza.cart)
     const dispatch = useDispatch()
+    
+    // Calculate total price
+    const totalPrice = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2)
 
     return(
-        <> 
-            <div className="cart">
-                <button className="cart-button">
-                    🛒 Cart ({cart?.length || 0})
-                </button>
-                
-                <div className="cart-content">
-                    <h3>Panier d'achat</h3>
-                    {cart.length === 0 ? (
-                        <p>Panier vide</p>
-                    ) : (
-                        <>
-                            {cart.map(element => (
-                                <div key={element.id} className="cart-item">
-                                    <img src={element.img} alt={element.name} />
-                                    <div className="cart-item-details">
-                                        <span>{element.name}</span>
-                                        <span>€{element.price.toFixed(2)}</span>
-                                    </div>
-                                    <button 
-                                        className="remove-button"
-                                        onClick={() => dispatch(supprimer(element))}
-                                    >
-                                        ×
-                                    </button>
+        <div className="cart">
+            <h2 className="cart-title">Panier d'achat</h2>
+            <div className="cart-content">
+                {cart.length === 0 ? (
+                    <p className="empty-cart">Panier vide</p>
+                ) : (
+                    <>
+                        {cart.map((element, index) => (
+                            <div key={index} className="cart-item">
+                                <img src={element.image} alt={element.name} />
+                                <div className="cart-item-details">
+                                    <div>{element.name}</div>
+                                    <div>€{element.price.toFixed(2)}</div>
                                 </div>
-                            ))}
-                        </>
-                    )}
-                </div>
+                                <button 
+                                    className="remove-button"
+                                    onClick={() => dispatch(supprimer(element))}
+                                >
+                                    ×
+                                </button>
+                            </div>
+                        ))}
+                        
+                        <div className="cart-total">
+                            <span>Total</span>
+                            <span>€{totalPrice}</span>
+                        </div>
+                        
+                        <button className="checkout-button">
+                            Commander €{totalPrice}
+                        </button>
+                    </>
+                )}
             </div>
-</>
-        
+        </div>
     )
 }

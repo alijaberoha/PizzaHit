@@ -4,15 +4,14 @@
   padding-left: 80px;
   padding-right: 80px;
   display: flex;
-  justify-content: space-between;
-
+  gap: 30px;
 }
 
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 30px;
-  width: 75%;
+  flex: 3;  /* Takes 3/4 of the available space */
 }
 
 .menu-item {
@@ -126,32 +125,24 @@
 
 /* Cart Styles */
 .cart {
+  flex: 1;  /* Takes 1/4 of the available space */
+  position: sticky;
+  top: 20px;
+  height: fit-content;
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  width: 20%;
-  height: 350px;
 }
 
-.cart-button {
-  background-color: #c8102e;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.cart-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
 }
 
 .cart-content {
   padding: 20px;
-  background: white;
-  border-radius: 8px;
-  margin-top: 10px;
-  max-width: 300px;
 }
 
 .cart-item {
@@ -173,25 +164,50 @@
   flex-grow: 1;
 }
 
-.remove-button {
-  background-color: #c8102e;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.8rem;
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  font-weight: bold;
 }
 
-.promo-tag {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: #ffc107;
-  color: #000;
-  font-weight: bold;
-  font-size: 0.8rem;
-  padding: 4px 8px;
-  border-radius: 5px;
-  z-index: 1;
+.checkout-button {
+  background-color: #93c01f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s;
+}
+
+.checkout-button:hover {
+  background-color: #7da519;
+}
+
+.empty-cart {
+  text-align: center;
+  color: #666;
+  padding: 20px 0;
+}
+
+@media (max-width: 992px) {
+  .menu-container {
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .menu-grid {
+    width: 100%;
+  }
+  
+  .cart {
+    width: 100%;
+    position: static;
+  }
 }
