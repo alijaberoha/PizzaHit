@@ -2,6 +2,8 @@ import { useParams, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { ajouter } from "../home/homeSlice"
 import "./details.css"
+import Cart from "../../components/cart/cart"
+import Navbar from "../../components/nav/Nav"
 
 export default function Details() {
     const { name } = useParams()
@@ -17,7 +19,10 @@ export default function Details() {
     }
 
     return (
-        <div className="main-details">
+        <>
+        <Navbar/>
+            <div className="all-details">
+            <div className="main-details">
             <button className="back-button" onClick={() => navigate(-1)}>
                 ← Back
             </button>
@@ -56,5 +61,11 @@ export default function Details() {
                 </div>
             </div>
         </div>
+
+        <Cart/>
+        </div>
+        </>
+        
+        
     )
 }
