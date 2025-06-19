@@ -27,6 +27,7 @@ export default function Home() {
                         <div className="menu-info">
                             <h2 className="menu-name">{element.name}</h2>
                             <div className="price-container">
+                                <div className="div-description"><p className="menu-description-hover">{element.description}</p></div>
                                 <p className="menu-price">€{element.price.toFixed(2)}</p>
                                 <button 
                                     onClick={(e) => {
