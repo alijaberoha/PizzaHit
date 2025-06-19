@@ -268,7 +268,7 @@ const homeSlice = createSlice({
 
     reducers:{
             'ajouter': (state,action)=>  {
-              const newPizza = {id: Date.now(), name: action.payload.name, img: action.payload.image, price: action.payload.price};
+              const newPizza = {id: Date.now(), name: action.payload.name, image: action.payload.image, price: action.payload.price};
               state.cart.push(newPizza);
             },
             'supprimer': (state,action) => {

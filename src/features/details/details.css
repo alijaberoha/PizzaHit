@@ -2,10 +2,12 @@
     display: flex;
     gap: 30px;
     background-color: #f4f4f4;
-    padding: 40px 80px;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 .main-details {
+    margin-top: 30px;
     flex: 3; /* Takes 3/4 of the space */
     max-width: 100%;
     padding: 0;
@@ -25,8 +27,8 @@
 .details-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
     margin-top: 20px;
+    
 }
 
 .details-image-container {
@@ -37,13 +39,16 @@
 
 .details-image {
     width: 100%;
-    border-radius: 8px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
     display: block;
+    height: 80vh;
 }
 
 .details-info {
     background-color: white;
-    border-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
     padding: 20px;
     display: flex;
     flex-direction: column;

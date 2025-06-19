@@ -124,7 +124,8 @@
 }
 
 /* Cart Styles */
-.cart {
+.cart { 
+  margin-top: 70px;
   flex: 1;  /* Takes 1/4 of the available space */
   position: sticky;
   top: 20px;
@@ -132,6 +133,8 @@
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-title {
@@ -142,7 +145,9 @@
 }
 
 .cart-content {
-  padding: 20px;
+  padding: 0 20px;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .cart-item {
@@ -164,12 +169,32 @@
   flex-grow: 1;
 }
 
+.remove-button {
+  background-color: #c8102e;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.cart-footer {
+  margin-top: auto;
+  padding: 20px;
+  border-top: 1px solid #eee;
+}
+
 .cart-total {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 0;
   font-weight: bold;
+  margin-bottom: 15px;
 }
 
 .checkout-button {
@@ -195,19 +220,36 @@
   padding: 20px 0;
 }
 
+/* Make sure the menu container has flex display */
+.menu-container {
+  padding: 40px;
+  background-color: #f4f4f4;
+  padding-left: 80px;
+  padding-right: 80px;
+  display: flex;
+  gap: 30px;
+}
+
+/* Adjust responsiveness */
 @media (max-width: 992px) {
   .menu-container {
     flex-direction: column;
     padding-left: 20px;
     padding-right: 20px;
   }
-  
-  .menu-grid {
-    width: 100%;
-  }
-  
-  .cart {
-    width: 100%;
-    position: static;
+}
+
+/* Same for details page */
+.all-details {
+  display: flex;
+  gap: 30px;
+  background-color: #f4f4f4;
+  padding: 40px 80px;
+}
+
+@media (max-width: 992px) {
+  .all-details {
+    flex-direction: column;
+    padding: 20px;
   }
 }

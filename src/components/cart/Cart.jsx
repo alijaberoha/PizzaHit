@@ -33,18 +33,22 @@ export default function Cart() {
                                 </button>
                             </div>
                         ))}
-                        
-                        <div className="cart-total">
-                            <span>Total</span>
-                            <span>€{totalPrice}</span>
-                        </div>
-                        
-                        <button className="checkout-button">
-                            Commander €{totalPrice}
-                        </button>
                     </>
                 )}
             </div>
+            
+            {cart.length > 0 && (
+                <div className="cart-footer">
+                    <div className="cart-total">
+                        <span>Total</span>
+                        <span>€{totalPrice}</span>
+                    </div>
+                    
+                    <button className="checkout-button">
+                        Commander €{totalPrice}
+                    </button>
+                </div>
+            )}
         </div>
     )
 }
