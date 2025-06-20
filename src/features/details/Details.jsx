@@ -133,7 +133,10 @@ export default function Details() {
                         </div>
                     </div>
                 </div>
+                <div className="carte-details">
                 <Cart />
+
+                </div>
             </div>
         </>
     )

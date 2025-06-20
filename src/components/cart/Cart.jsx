@@ -48,7 +48,7 @@ export default function Cart() {
                 )}
             </div>
             
-            {cart.length > 0 && (
+         
                 <div className="cart-footer">
                     <div className="cart-total">
                         <span>Total</span>
@@ -59,7 +59,7 @@ export default function Cart() {
                         Commander €{totalPrice}
                     </button>
                 </div>
-            )}
+        
         </div>
     )
 }

@@ -185,7 +185,7 @@ const initialState = {
     },
     {
       "name": "Sweet Chicken Curry",
-      "description": "",
+      "description": "Devenez le chef cuisto et composez votre pizza: sauce tomate, mozzarella +3 garnitures au choix.",
       "price": 18.60,
       "image": "https://cdn-catalog.pizzahut.be/images/be/20220504090424606.jpg",
       "ingredients": [
