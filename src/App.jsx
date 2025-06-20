@@ -2,6 +2,7 @@ import './App.css'
 import Home from "../src/features/home/Home"
 import { Route, Routes } from 'react-router-dom'
 import Details from './features/details/details'
+import Confirmation from './features/confirmation/Confirmation'
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
      <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path='/Pizza/:name' element={<Details/>}/>
+      <Route path='/confirmation' element={<Confirmation/>}/>
     </Routes>
     </>
   )

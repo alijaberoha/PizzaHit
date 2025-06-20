@@ -1,13 +1,12 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import "./home.css"
-import { ajouter } from "./homeSlice"
 import Navbar from "../../components/nav/Nav"
 import { NavLink } from "react-router-dom"
 import Cart from "../../components/cart/cart"
 
 export default function Home() {
     const pizzas = useSelector(state => state.pizza.allPizzas)
-    const dispatch = useDispatch()
+
 
     return(
         <> 
@@ -16,11 +15,11 @@ export default function Home() {
         <div className="menu-container">
             <div className="menu-grid">
                 {pizzas.map(element => (
-<NavLink 
-  key={element.name} 
-  to={`/Pizza/${element.name}`} 
-  style={{ textDecoration: 'none', color: 'inherit' }}
->
+        <NavLink 
+        key={element.name} 
+        to={`/Pizza/${element.name}`} 
+        style={{ textDecoration: 'none', color: 'inherit' }}
+        >
                     <div className="menu-item">
                         {element.promo && <span className="promo-tag">Promo</span>}
                         <div className="divMenuImage">
@@ -34,16 +33,10 @@ export default function Home() {
                             <p className="menu-description-hover">{element.description}</p>
                             <div className="price-container2">
                                 <p className="menu-price"><span>a partir de </span> €{element.price.toFixed(2)}</p>
-                                <button 
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        dispatch(ajouter(element))
-                                    }} 
-                                    className="add-button">+</button>
+                                <NavLink to={`/Pizza/${element.name}`}>
+                                    <button className="add-button">+</button>
+                                </NavLink>
                             </div>
-
-
-                            
                         </div>
                     </div>
                     </NavLink>
