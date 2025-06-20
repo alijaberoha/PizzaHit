@@ -223,6 +223,43 @@
     background-color: #7da519;
 }
 
+.ingredient-quantity {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+/* Add some styles for cart customizations */
+.cart-item-customizations {
+    font-size: 0.8rem;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 4px;
+}
+
+.cart-item-name {
+    font-weight: 500;
+}
+
+.cart-item-price {
+    font-weight: 600;
+    color: #333;
+}
+
+.removed-ingredients-preview {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    font-style: italic;
+    color: #666;
+    font-size: 0.9rem;
+}
+
 @media (max-width: 992px) {
     .all-details {
         flex-direction: column;

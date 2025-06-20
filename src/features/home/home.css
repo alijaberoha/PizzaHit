@@ -166,7 +166,27 @@
 }
 
 .cart-item-details {
-  flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 3px;
+}
+
+.cart-item-customizations {
+    font-size: 0.8rem;
+    color: #777;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.cart-item-price {
+    font-weight: 600;
+    color: #333;
 }
 
 .remove-button {

@@ -16,18 +16,33 @@ export default function Details() {
     )
     
     const [selectedIngredients, setSelectedIngredients] = useState(
-        pizza?.ingredients.map(ing => ({ ...ing, selected: true })) || []
+        pizza?.ingredients.map(ing => ({ ...ing, selected: true, quantity: 1 })) || []
     )
 
     const toggleIngredient = (index) => {
-        setSelectedIngredients(selectedIngredients.map((ing, i) => 
-            i === index ? { ...ing, selected: !ing.selected } : ing
-        ))
+        setSelectedIngredients(selectedIngredients.map((ing, i) => {
+            if (i === index) {
+                // Toggle selected state and set quantity to 0 when deselected
+                const newSelected = !ing.selected;
+                return { 
+                    ...ing, 
+                    selected: newSelected,
+                    quantity: newSelected ? 1 : 0 // Set to 0 when not selected
+                };
+            }
+            return ing;
+        }));
     }
 
     if (!pizza) {
         return <div>Pizza not found</div>
     }
+
+    const getRemovedIngredientsText = () => {
+        const removed = selectedIngredients.filter(ing => !ing.selected);
+        if (removed.length === 0) return '';
+        return removed.map(ing => `sans ${ing.name.toLowerCase()}`).join(', ');
+    };
 
     return (
         <>
@@ -77,6 +92,9 @@ export default function Details() {
                                         <div key={index} className="ingredient-item">
                                             <span className="ingredient-name">{ingredient.name}</span>
                                             <div className="ingredient-controls">
+                                                <span className="ingredient-quantity">
+                                                    {ingredient.quantity}
+                                                </span>
                                                 <button 
                                                     className={`control-button ${!ingredient.selected ? 'active' : ''}`}
                                                     onClick={() => toggleIngredient(index)}
@@ -87,6 +105,13 @@ export default function Details() {
                                         </div>
                                     ))}
                                 </div>
+                                
+                                {/* Display removed ingredients preview */}
+                                {getRemovedIngredientsText() && (
+                                    <div className="removed-ingredients-preview">
+                                        {getRemovedIngredientsText()}
+                                    </div>
+                                )}
                             </div>
                             
                             <button 
@@ -94,8 +119,11 @@ export default function Details() {
                                 onClick={() => {
                                     const customizedPizza = {
                                         ...pizza,
-                                        ingredients: selectedIngredients.filter(ing => ing.selected)
+                                        ingredients: selectedIngredients.filter(ing => ing.selected),
+                                        removedIngredients: selectedIngredients.filter(ing => !ing.selected),
+                                        customizations: getRemovedIngredientsText()
                                     }
+                                    console.log("Dispatching pizza:", customizedPizza) // Add this line
                                     dispatch(ajouter(customizedPizza))
                                     navigate('/')
                                 }}

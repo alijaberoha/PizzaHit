@@ -2,14 +2,16 @@ import { useDispatch, useSelector } from "react-redux"
 import "../../features/home/home.css"
 import { supprimer } from "../../features/home/homeSlice"
 
-
 export default function Cart() {
     const cart = useSelector(state => state.pizza.cart)
     const dispatch = useDispatch()
+
+    console.log("Cart contents:", cart)
     
     // Calculate total price
     const totalPrice = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2)
-
+    
+    
     return(
         <div className="cart">
             <h2 className="cart-title">Panier d'achat</h2>
@@ -22,8 +24,17 @@ export default function Cart() {
                             <div key={index} className="cart-item">
                                 <img src={element.image} alt={element.name} />
                                 <div className="cart-item-details">
-                                    <div>{element.name}</div>
-                                    <div>€{element.price.toFixed(2)}</div>
+                                    <div className="cart-item-name">{element.name}</div>
+                                    
+                                    {/* Display customizations if they exist */}
+                                    {element.customizations && (
+                                        <div className="cart-item-customizations">
+                                            {element.customizations}
+                                        </div>
+                                    )}
+
+                                    
+                                    <div className="cart-item-price">€{element.price.toFixed(2)}</div>
                                 </div>
                                 <button 
                                     className="remove-button"
