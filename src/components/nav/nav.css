@@ -1,12 +1,6 @@
-.navbar {
-  background-color: rgb(200, 16, 46);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 30px;
-  height: 70px;
-  font-family: 'Helvetica', sans-serif;
+body{
+  margin: 0;
+  padding: 0;
 }
 
 .logo img {
@@ -46,10 +40,11 @@
 
 .login-btn {
   background: transparent;
-  border: 1px dotted white;
+  border: 2px dotted white;
   color: white;
-  padding: 8px 16px;
+  padding: 13px 16px;
   border-radius: 25px;
+  font-size: 20px;
   cursor: pointer;
   font-weight: bold;
 }
@@ -57,16 +52,15 @@
 .lang-selector {
   cursor: pointer;
   font-weight: bold;
+  font-size: 20px;
 }
 .logo img {
   height: 45px;
   width: auto;
 }
 
-.center-link {
-  font-size: 18px;
-  font-weight: 500;
-}.navbar {
+
+.navbar {
   background-color: #c8102e;
   color: white;
   display: flex;
@@ -76,8 +70,9 @@
   height: 70px;
   font-family: 'Helvetica', sans-serif;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  position: relative;
-  z-index: 10;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .logo img {
@@ -86,9 +81,9 @@
 }
 
 .center-link {
-  font-weight: bold;
+  
   position: relative;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .center-link::after {

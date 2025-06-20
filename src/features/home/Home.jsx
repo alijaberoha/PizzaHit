@@ -16,29 +16,34 @@ export default function Home() {
         <div className="menu-container">
             <div className="menu-grid">
                 {pizzas.map(element => (
-                    <NavLink key={element.name} to={`/Pizza/${element.name}`}>
+<NavLink 
+  key={element.name} 
+  to={`/Pizza/${element.name}`} 
+  style={{ textDecoration: 'none', color: 'inherit' }}
+>
                     <div className="menu-item">
                         {element.promo && <span className="promo-tag">Promo</span>}
-                        <img 
-                            src={element.image} 
-                            alt={element.name} 
-                            className="menu-image"
-                        />
+                        <div className="divMenuImage">
+                            <img 
+                                src={element.image} 
+                                alt={element.name} 
+                                className="menu-image"/>
+                        </div>
                         <div className="menu-info">
                             <h2 className="menu-name">{element.name}</h2>
-                            <div className="price-container">
-                                <div className="div-description"><p className="menu-description-hover">{element.description}</p></div>
-                                <p className="menu-price">€{element.price.toFixed(2)}</p>
+                            <p className="menu-description-hover">{element.description}</p>
+                            <div className="price-container2">
+                                <p className="menu-price"><span>a partir de </span> €{element.price.toFixed(2)}</p>
                                 <button 
                                     onClick={(e) => {
                                         e.preventDefault();
                                         dispatch(ajouter(element))
                                     }} 
-                                    className="add-button"
-                                >
-                                    +
-                                </button>
+                                    className="add-button">+</button>
                             </div>
+
+
+                            
                         </div>
                     </div>
                     </NavLink>
