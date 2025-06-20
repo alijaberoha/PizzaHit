@@ -18,14 +18,12 @@
 .menu-item {
     background: white;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: relative;
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease;
-    /* height: 286px; */
-    height: 350px;
+    height: 310px;
 }
 .divMenuImage {
   position: relative;
@@ -114,7 +112,7 @@
     right: 15px; */
 }
 .menu-name {
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: bold;
     color: #333;
     margin: 0;
@@ -123,7 +121,7 @@
 }
 
 .menu-price {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-weight: bold;
   color: #000;
   margin: 0;
@@ -157,3 +155,6 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
   background-color: #a30c25;
 }
 
+a{
+  text-decoration: none;
+}

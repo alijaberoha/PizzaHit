@@ -4,7 +4,8 @@
     background-color: #f4f4f4;
     padding-left: 100px;
     padding-right: 100px;
-    height:75go0px;
+    height:720px;
+    overflow-y: hidden;
 }
 
 .main-details {
