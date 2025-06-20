@@ -144,9 +144,16 @@
 .cart-total-section {
   display: flex;
   justify-content: space-between;
-  padding: 12px 0;
   font-size: 18px;
   font-weight: 700;
+}
+
+.cart-shipping-section {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 300;
+  padding-bottom: 5px;
 }
 
 .checkout{

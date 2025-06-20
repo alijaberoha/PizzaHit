@@ -123,7 +123,7 @@ export default function Details() {
                                         removedIngredients: selectedIngredients.filter(ing => !ing.selected),
                                         customizations: getRemovedIngredientsText()
                                     }
-                                    console.log("Dispatching pizza:", customizedPizza) // Add this line
+                                    console.log("Dispatching pizza:", customizedPizza)
                                     dispatch(ajouter(customizedPizza))
                                     navigate('/')
                                 }}

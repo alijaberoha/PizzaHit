@@ -88,6 +88,10 @@ export default function Cart() {
             
             {/* Always show the checkout section but apply disabled styles when cart is empty */}
             <div className="checkout-section">
+                 <div className="cart-shipping-section">
+                    <span className="total-label">Livraison</span>
+                    <span className="total-value">€1.99</span>
+                </div>
                 <div className="cart-total-section">
                     <span className="total-label">Total</span>
                     <span className="total-value">€{isCartEmpty ? '0.00' : totalPrice}</span>
