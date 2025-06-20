@@ -1,50 +1,111 @@
-import { useParams, useNavigate } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
-import { ajouter } from "../home/homeSlice"
-import "./details.css"
-import { useState } from "react"
-import Cart from "../../components/cart/cart"
+import { useParams, useNavigate, useLocation } from "react-router-dom" // Add useLocation
+import { useDispatch, useSelector } from "react-redux"
+import { useState, useEffect } from "react"
+import { ajouter, supprimer } from "../home/homeSlice"
 import Navbar from "../../components/nav/Nav"
-
+import "./details.css"
+import Cart from "../../components/cart/cart"
 export default function Details() {
     const { name } = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const location = useLocation() // Access location state
     
+    // Check if we're editing an existing cart item
+    const editMode = location.state?.editMode || false
+    const cartItemId = location.state?.cartItemId
+    
+    // Get all pizzas
     const pizza = useSelector(state => 
         state.pizza.allPizzas.find(pizza => pizza.name === name)
     )
     
-    const [selectedIngredients, setSelectedIngredients] = useState(
-        pizza?.ingredients.map(ing => ({ ...ing, selected: true, quantity: 1 })) || []
-    )
-
-    const toggleIngredient = (index) => {
-        setSelectedIngredients(selectedIngredients.map((ing, i) => {
-            if (i === index) {
-                // Toggle selected state and set quantity to 0 when deselected
-                const newSelected = !ing.selected;
-                return { 
-                    ...ing, 
-                    selected: newSelected,
-                    quantity: newSelected ? 1 : 0 // Set to 0 when not selected
-                };
+    // Get cart items
+    const cartItems = useSelector(state => state.pizza.cart)
+    
+    // Initialize selected ingredients
+    const [selectedIngredients, setSelectedIngredients] = useState([])
+    
+    useEffect(() => {
+        if (pizza) {
+            if (editMode && cartItemId) {
+                // We're editing an existing cart item
+                const cartItem = cartItems.find(item => item.id === cartItemId)
+                
+                if (cartItem && cartItem.customizations) {
+                    // Parse customizations to determine which ingredients were removed
+                    // This assumes customizations are in format "sans X, Y, Z"
+                    const removedText = cartItem.customizations;
+                    
+                    // Initialize all ingredients as selected
+                    const initialIngredients = pizza.ingredients.map(ing => {
+                        // Check if this ingredient is in the removed text
+                        const isRemoved = removedText.toLowerCase().includes(ing.name.toLowerCase());
+                        
+                        return {
+                            ...ing,
+                            selected: !isRemoved, // If it's in the removed text, it's not selected
+                            quantity: 1
+                        };
+                    });
+                    
+                    setSelectedIngredients(initialIngredients);
+                } else {
+                    // Just use default ingredients
+                    setSelectedIngredients(
+                        pizza.ingredients.map(ing => ({ ...ing, selected: true, quantity: 1 }))
+                    );
+                }
+            } else {
+                // Normal mode - all ingredients selected by default
+                setSelectedIngredients(
+                    pizza.ingredients.map(ing => ({ ...ing, selected: true, quantity: 1 }))
+                );
             }
-            return ing;
-        }));
+        }
+    }, [pizza, editMode, cartItemId, cartItems]);
+    
+    // Toggle ingredient selection
+    const toggleIngredient = (index) => {
+        const newIngredients = [...selectedIngredients]
+        newIngredients[index].selected = !newIngredients[index].selected
+        setSelectedIngredients(newIngredients)
+    }
+    
+    // Generate text for removed ingredients
+    const getRemovedIngredientsText = () => {
+        const removedIngredients = selectedIngredients
+            .filter(ing => !ing.selected)
+            .map(ing => ing.name.toLowerCase())
+            
+        if (removedIngredients.length === 0) return ''
+        
+        return `sans ${removedIngredients.join(', ')}`
+    }
+    
+    // Handle adding to cart
+    const handleAddToCart = () => {
+        // If editing, remove the original item first
+        if (editMode && cartItemId) {
+            dispatch(supprimer({ id: cartItemId }))
+        }
+        
+        // Add the new/modified item
+        const customizedPizza = {
+            ...pizza,
+            ingredients: selectedIngredients.filter(ing => ing.selected),
+            customizations: getRemovedIngredientsText()
+        }
+        
+        dispatch(ajouter(customizedPizza))
+        navigate('/')
     }
 
     if (!pizza) {
         return <div>Pizza not found</div>
     }
 
-    const getRemovedIngredientsText = () => {
-        const removed = selectedIngredients.filter(ing => !ing.selected);
-        if (removed.length === 0) return '';
-        return removed.map(ing => `sans ${ing.name.toLowerCase()}`).join(', ');
-    };
-
-    return (
+    return(
         <>
             <Navbar />
             <div className="all-details">
@@ -92,15 +153,15 @@ export default function Details() {
                                         <div key={index} className="ingredient-item">
                                             <span className="ingredient-name">{ingredient.name}</span>
                                             <div className="ingredient-controls">
-                                                <span className="ingredient-quantity">
-                                                    {ingredient.quantity}
-                                                </span>
                                                 <button 
                                                     className={`control-button ${!ingredient.selected ? 'active' : ''}`}
                                                     onClick={() => toggleIngredient(index)}
                                                 >
                                                     {ingredient.selected ? '−' : '+'}
                                                 </button>
+                                                <span className="ingredient-quantity">
+                                                    {ingredient.quantity}
+                                                </span>
                                             </div>
                                         </div>
                                     ))}
@@ -114,21 +175,12 @@ export default function Details() {
                                 )}
                             </div>
                             
+                            {/* Change "Ajouter au panier" to "Modifier" when in edit mode */}
                             <button 
                                 className="add-to-cart-button"
-                                onClick={() => {
-                                    const customizedPizza = {
-                                        ...pizza,
-                                        ingredients: selectedIngredients.filter(ing => ing.selected),
-                                        removedIngredients: selectedIngredients.filter(ing => !ing.selected),
-                                        customizations: getRemovedIngredientsText()
-                                    }
-                                    console.log("Dispatching pizza:", customizedPizza)
-                                    dispatch(ajouter(customizedPizza))
-                                    navigate('/')
-                                }}
+                                onClick={handleAddToCart}
                             >
-                                Ajouter au panier €{pizza.price.toFixed(2)}
+                                {editMode ? 'Modifier' : 'Ajouter au panier'}
                             </button>
                         </div>
                     </div>

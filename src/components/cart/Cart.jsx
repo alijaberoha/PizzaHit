@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux"
-import "../../features/home/home.css"
 import { supprimer, viderCart, augmenterQuantite, diminuerQuantite } from "../../features/home/homeSlice"
 import { useNavigate } from "react-router-dom"
 import "./cart.css"
@@ -17,13 +16,22 @@ export default function Cart() {
     
     // Check if cart is empty
     const isCartEmpty = cart.length === 0
+    
+    const handleModify = (item) => {
+        navigate(`/Pizza/${item.name}`, {
+            state: { 
+                editMode: true,
+                cartItemId: item.id,
+                removedIngredients: item.customizations 
+            }
+        })
+    }
 
     const handleCheckout = () => {
         if (!isCartEmpty) {
             dispatch(viderCart());
             navigate('/confirmation');
         }
-        // No need for an alert here since the button will be disabled
     }
 
     return(
@@ -54,7 +62,7 @@ export default function Cart() {
                                             <button 
                                                 className="quantity-btn"
                                                 onClick={() => dispatch(diminuerQuantite(element))}
-                                                disabled={element.quantity <= 1}
+                                        
                                             >
                                                 −
                                             </button>
@@ -65,10 +73,11 @@ export default function Cart() {
                                             >
                                                 +
                                             </button>
-                                        </div>
-                                        
-                                        <div className="cart-buttons">
-                                            <button className="modify-btn" onClick={() => navigate(`/Pizza/${element.name}`)}>
+                                            <div className="cart-buttons">
+                                            <button 
+                                                className="modify-btn" 
+                                                onClick={() => handleModify(element)}
+                                            >
                                                 Modifier
                                             </button>
                                             <button 
@@ -78,6 +87,9 @@ export default function Cart() {
                                                 Supprimer
                                             </button>
                                         </div>
+                                        </div>
+                                        
+                                        
                                     </div>
                                 </div>
                             ))}

@@ -138,6 +138,9 @@
     align-items: center;
     padding: 10px 0;
     justify-content: space-between;
+    border: solid 2px rgba(201, 199, 199, 0.712);
+    border-radius: 5px;
+    padding: 10px;
 }
 
 .option-indicator {
@@ -203,12 +206,12 @@
 }
 
 .control-button {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     border: 1px solid #ddd;
-    background-color: white;
-    color: #999;
+    background-color: #c3c2c2e6;
+    color: white;
     font-size: 1.2rem;
     display: flex;
     align-items: center;
