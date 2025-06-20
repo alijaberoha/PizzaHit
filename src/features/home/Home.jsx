@@ -32,7 +32,7 @@ export default function Home() {
                             <h2 className="menu-name">{element.name}</h2>
                             <p className="menu-description-hover">{element.description}</p>
                             <div className="price-container2">
-                                <p className="menu-price"><span>a partir de </span> €{element.price.toFixed(2)}</p>
+                                <p className="menu-price"><span>à partir de </span> €{element.price.toFixed(2)}</p>
                                 <NavLink to={`/Pizza/${element.name}`}>
                                     <button className="add-button">+</button>
                                 </NavLink>

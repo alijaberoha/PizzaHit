@@ -68,7 +68,7 @@ export default function Details() {
                             
                             <p className="details-description">{pizza.description}</p>
                             
-                            <div className="details-section">
+                            <div>
                                 <h2 className="section-title">Pâte à pizza</h2>
                                 <div className="section-option">
                                     <div className="option-indicator">

@@ -1,16 +1,22 @@
-/* Cart Styles */
-.cart { 
-  flex: 1;  /* Takes 1/4 of the available space */
-  position: sticky;
-  top: 20px;
-  height: fit-content;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* Cart Container */
+.cart-container {
   display: flex;
   flex-direction: column;
-  width: 270px !important;
-  flex:none
+  gap: 10px;
+  width: 270px;
+  position: sticky;
+  top: 80px;
+  align-self: flex-start;
+}
+
+/* Cart Styles */
+.cart { 
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: calc(100vh - 220px); /* Leaving space for checkout section */
 }
 
 .cart-title {
@@ -25,7 +31,6 @@
   padding: 0;
   overflow-y: auto;
   flex-grow: 1;
-  max-height: 400px;
 }
 
 .empty-cart {
@@ -94,8 +99,13 @@
   justify-content: center;
 }
 
-.quantity-btn:hover {
+.quantity-btn:hover:not(:disabled) {
   background-color: #f5f5f5;
+}
+
+.quantity-btn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
 }
 
 .quantity-value {
@@ -126,10 +136,9 @@
   color: #e31837;
 }
 
-.cart-footer {
-  margin-top: auto;
+/* Checkout Section */
+.checkout-section {
   padding: 16px;
-  border-top: 1px solid #f0f0f0;
 }
 
 .cart-total-section {
@@ -138,6 +147,11 @@
   padding: 12px 0;
   font-size: 18px;
   font-weight: 700;
+}
+
+.checkout{
+ position: sticky;
+  top: 200px;
 }
 
 .checkout-button {
@@ -153,8 +167,16 @@
   display: flex;
   align-items: center;
   padding: 0;
-  margin-top: 8px;
+  margin-top: 12px;
 }
+
+.checkout-button.disabled {
+  backdrop-filter: #93c01f;
+  opacity: 0.6;
+  cursor: not-allowed;
+ 
+}
+
 
 .checkout-quantity {
   width: 48px;
@@ -184,29 +206,9 @@
 }
 
 @media (max-width: 992px) {
-  .cart {
+  .cart-container {
     width: 100%;
+    position: relative;
+    top: 0;
   }
-}
-
-.quantity-btn {
-  width: 32px;
-  height: 32px;
-  background-color: white;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  color: #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.quantity-btn:hover:not(:disabled) {
-  background-color: #f5f5f5;
-}
-
-.quantity-btn:disabled {
-  color: #ccc;
-  cursor: not-allowed;
 }
