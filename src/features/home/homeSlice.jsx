@@ -265,20 +265,48 @@ const homeSlice = createSlice({
     name: 'pizzas',
     initialState,
     reducers:{
-            'ajouter': (state,action)=>  {
-              const newPizza = {
-                id: Date.now(), 
-                name: action.payload.name, 
-                image: action.payload.image, 
-                price: action.payload.price,
-                customizations: action.payload.customizations || ''
-              };
-              state.cart.push(newPizza);
-            },
+            'ajouter': (state, action) => {
+            // Check if item already exists in cart
+            const existingItem = state.cart.find(item => 
+                item.name === action.payload.name && 
+                item.customizations === (action.payload.customizations || '')
+            );
+            
+            if (existingItem) {
+                // Increase quantity if item exists
+                existingItem.quantity += 1;
+            } else {
+                // Add new item with quantity 1
+                const newPizza = {
+                    id: Date.now(),
+                    name: action.payload.name,
+                    image: action.payload.image,
+                    price: action.payload.price,
+                    customizations: action.payload.customizations || '',
+                    quantity: 1
+                };
+                state.cart.push(newPizza);
+            }
+        },
+
+        'augmenterQuantite': (state, action) => {
+            const item = state.cart.find(item => item.id === action.payload.id);
+            if (item) {
+                item.quantity += 1;
+            }
+        },
+        
+        'diminuerQuantite': (state, action) => {
+            const item = state.cart.find(item => item.id === action.payload.id);
+            if (item && item.quantity > 1) {
+                item.quantity -= 1;
+            }
+        },
             'supprimer': (state,action) => {
-                state.cart= state.cart.filter((p) => p.id !== action.payload.id)} 
+                state.cart= state.cart.filter((p) => p.id !== action.payload.id)},
+            'viderCart': (state) => {state.cart = [];} 
     
 }})
 
 export const homeReducer = homeSlice.reducer
-export const {ajouter, supprimer} = homeSlice.actions
+export const {ajouter, supprimer, viderCart, augmenterQuantite,diminuerQuantite} = homeSlice.actions
