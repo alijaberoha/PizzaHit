@@ -1,7 +1,7 @@
 import './App.css'
 import Home from "../src/features/home/Home"
 import { Route, Routes } from 'react-router-dom'
-import Details from './features/details/details'
+import Details from './features/details/Details'
 import Confirmation from './features/confirmation/Confirmation'
 
 function App() {

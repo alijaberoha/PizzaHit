@@ -42,8 +42,12 @@ export default function Home() {
                     </NavLink>
                 ))}
             </div>
-            <Cart />
+        <div className="desktop-only hide-on-mobile">
+         <Cart />
         </div>
+     </div>
+
+
         </>
     )
 }

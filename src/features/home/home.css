@@ -155,6 +155,215 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
   background-color: #a30c25;
 }
 
+/* Affichage mobile/tablette comme le modèle de ton ami */
+
+@media (max-width: 992px) {
+  .menu-container {
+    padding: 30px;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr); /* tablette = 2 cartes */
+    width: 100%;
+    gap: 25px;
+  }
+
+  .menu-item {
+    height: 320px;
+    width: 100;
+  }
+
+  .menu-info {
+    padding: 10px;
+  }
+
+  .menu-name {
+    font-size: 1.1rem;
+  }
+
+  .menu-price {
+    font-size: 1.1rem;
+  }
+
+  .add-button {
+    width: 45px;
+    height: 45px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .menu-container {
+    padding: 20px;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr; /* mobile = 1 carte */
+    width: 100%;
+  }
+
+  .menu-item {
+    height: auto;
+    width: 100%;
+  }
+
+  .menu-image {
+    height: 220px;
+    object-fit: cover;
+  }
+
+  .menu-info {
+    position: static;
+    padding: 12px;
+  }
+
+  .menu-name {
+    font-size: 1rem;
+  }
+
+  .menu-description-hover {
+    font-size: 13px;
+    max-height: none;
+    opacity: 1;
+  }
+
+  .menu-price {
+    font-size: 1rem;
+  }
+
+  .add-button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.6rem;
+  }
+
+  /* BOUTON "Commander" MOBILE */
+  .mobile-commander-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #689f38;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(104, 159, 56, 0.3);
+    z-index: 1000;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-family: "Nunito Sans", sans-serif;
+  }
+
+  .mobile-commander-btn:hover:not(.disabled) {
+    background-color: #4c6f01;
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 6px 20px rgba(104, 159, 56, 0.4);
+  }
+
+  .mobile-commander-btn.disabled {
+    background-color: #C6DA99;
+    color: #ffffff;
+    cursor: not-allowed;
+    box-shadow: 0 4px 15px rgba(204, 204, 204, 0.3);
+  }
+
+  .commander-text {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .commander-count {
+    background-color: white;
+    color: #689f38;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .menu-item{
+   
+  }
+  .mobile-commander-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #689f38;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(104, 159, 56, 0.3);
+    z-index: 1000;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-family: "Nunito Sans", sans-serif;
+  }
+
+  .mobile-commander-btn:hover {
+    background-color: #4c6f01;
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 6px 20px rgba(104, 159, 56, 0.4);
+  }
+
+  .commander-text {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr); /* 3 cartes par ligne */
+  }
+
+  .commander-count {
+    background-color: white;
+    color: #689f38;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+
+  }
+  .menu-description-hover{
+    height: 0px;
+  }
+      
+  .menu-item:hover .menu-description-hover {
+    max-height: 100px;
+  }
+}
 a{
   text-decoration: none;
 }

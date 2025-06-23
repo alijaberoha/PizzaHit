@@ -90,3 +90,64 @@ body{
   height: 2px;
   background-color: white;
 }
+/* Responsive Tablette */
+@media (max-width: 1024px) {
+  .nav-links {
+    gap: 20px;
+  }
+
+  .login-btn,
+  .lang-selector {
+    font-size: 18px;
+    padding: 10px 14px;
+  }
+
+  .center-link {
+    font-size: 18px;
+  }
+
+  .navbar {
+    padding: 0 20px;
+  }
+}
+
+/* Responsive Téléphone */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+    height:auto;
+    position: relative;
+  }
+
+  .logo img {
+    height: 40px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    margin-top: 10px;
+  }
+
+  .nav-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .login-btn,
+  .lang-selector {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .center-link {
+    font-size: 16px;
+  }
+}
