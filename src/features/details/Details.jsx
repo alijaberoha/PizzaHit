@@ -5,11 +5,12 @@ import { ajouter, supprimer } from "../home/homeSlice"
 import Navbar from "../../components/nav/Nav"
 import "./details.css"
 import Cart from "../../components/cart/cart"
+
 export default function Details() {
     const { name } = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const location = useLocation() // Access location state
+    const location = useLocation() 
     
     // Check if we're editing an existing cart item
     const editMode = location.state?.editMode || false
@@ -29,35 +30,29 @@ export default function Details() {
     useEffect(() => {
         if (pizza) {
             if (editMode && cartItemId) {
-                // We're editing an existing cart item
                 const cartItem = cartItems.find(item => item.id === cartItemId)
                 
                 if (cartItem && cartItem.customizations) {
-                    // Parse customizations to determine which ingredients were removed
-                    // This assumes customizations are in format "sans X, Y, Z"
+       
                     const removedText = cartItem.customizations;
                     
-                    // Initialize all ingredients as selected
                     const initialIngredients = pizza.ingredients.map(ing => {
-                        // Check if this ingredient is in the removed text
                         const isRemoved = removedText.toLowerCase().includes(ing.name.toLowerCase());
                         
                         return {
                             ...ing,
-                            selected: !isRemoved, // If it's in the removed text, it's not selected
+                            selected: !isRemoved,
                             quantity: 1
                         };
                     });
                     
                     setSelectedIngredients(initialIngredients);
                 } else {
-                    // Just use default ingredients
                     setSelectedIngredients(
                         pizza.ingredients.map(ing => ({ ...ing, selected: true, quantity: 1 }))
                     );
                 }
             } else {
-                // Normal mode - all ingredients selected by default
                 setSelectedIngredients(
                     pizza.ingredients.map(ing => ({ ...ing, selected: true, quantity: 1 }))
                 );
@@ -180,7 +175,9 @@ export default function Details() {
                                 className="add-to-cart-button"
                                 onClick={handleAddToCart}
                             >
-                                {editMode ? 'Modifier' : 'Ajouter au panier'}
+                                {editMode ? 'Mise à jour du panier ' : 'Ajouter au panier '}
+                                  
+                                €{pizza.price.toFixed(2)}
                             </button>
                         </div>
                     </div>

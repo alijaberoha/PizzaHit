@@ -1,0 +1,52 @@
+/* Ajoutez ces classes au début de votre panier.css */
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+  
+  .mobile-only {
+    display: block !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Styles existants... */
+  
+  /* Ajoutez ces styles pour la grille de pizzas */
+  .menu-container {
+    padding: 20px 15px 80px 15px; /* Ajoute du padding en bas pour éviter que le bouton fixe ne cache du contenu */
+    flex-direction: column;
+  }
+  
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Colonnes plus étroites sur mobile */
+    gap: 15px;
+  }
+  
+  .menu-item {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .divMenuImage {
+    height: 120px; /* Images plus petites sur mobile */
+  }
+  
+  /* Assurez-vous que le panier-modal ne cache pas le contenu quand il n'est pas actif */
+  .panier-modal {
+    pointer-events: none;
+  }
+  
+  .panier-modal.active {
+    pointer-events: auto;
+  }
+}

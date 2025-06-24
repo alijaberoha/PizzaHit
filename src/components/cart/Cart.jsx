@@ -9,7 +9,7 @@ export default function Cart() {
     const navigate = useNavigate()
     
     // Calculate total price accounting for quantities
-    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)
+    const totalPrice = cart.reduce((sum, item) => sum +1.99 + (item.price * item.quantity), 0).toFixed(2)
     
     // Calculate total items count
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
